@@ -10,7 +10,7 @@ public class SearchTests extends TestBase {
     public void appLaunchTest(){
     app.getMainScreen().clickOnSearchBar();
     app.getMainScreen().typeTextInTheSearchBar("IT");
-    app.getMainScreen().openFirstLink();
+    app.getMainScreen().openSearchResult(1);
     app.getMainScreen().saveToFavorite();
     app.getMainScreen().goToMainPage();
     app.getMainScreen().goToSaved();

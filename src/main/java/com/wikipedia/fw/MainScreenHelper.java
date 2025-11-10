@@ -19,7 +19,7 @@ public class MainScreenHelper extends BaseHelper {
     }
 
     public void clickOnSearchBar() {
-        tap(By.xpath("//android.widget.TextView[@text=\"Search Wikipedia\"]"));
+        tap(By.xpath("//*[@text='Search Wikipedia']"));
     }
 
     public void typeTextInTheSearchBar(String text) {
@@ -27,8 +27,17 @@ public class MainScreenHelper extends BaseHelper {
         type(By.id("search_src_text"), text);
     }
 
-    public void openFirstLink() {
-        tap(By.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"org.wikipedia:id/search_results_list\"]/android.view.ViewGroup[1]"));
+    public void openSearchResult(int index) {
+        pause(500);
+        String xpath = String.format(
+                "//androidx.recyclerview.widget.RecyclerView[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[%d]",
+                index
+        );
+        if (isElementPresent(By.xpath(xpath))) {
+            tap(By.xpath(xpath));
+        } else {
+            throw new RuntimeException("Search result with index: " + index + " not found!");
+        }
     }
 
     public void saveToFavorite() {
@@ -43,7 +52,7 @@ public class MainScreenHelper extends BaseHelper {
     }
 
     public void goToSaved() {
-        tapWithCoordinates(330,1639);
+        tapWithCoordinates(330, 1639);
         tap(By.id("item_title_container"));
     }
 
